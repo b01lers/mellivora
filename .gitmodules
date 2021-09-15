@@ -1,0 +1,3 @@
+[submodule "letsencrypt-docker-compose"]
+	path = letsencrypt-docker-compose
+	url = ssh://git@github.com/b01lers/letsencrypt-docker-compose.git
