@@ -36,8 +36,6 @@ services:
       - "443:443"
     volumes:
        - ./certbot_certs:/etc/nginx/ssl/
-    #  - .:/var/www/mellivora
-    #  - composerdependencies:/var/www/mellivora/include/thirdparty/composer
     links:
       - db
     depends_on: 
