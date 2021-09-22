@@ -5,6 +5,8 @@ ARG DOMAIN
 RUN echo "DOMAIN: $DOMAIN"
 
 COPY . /var/www/mellivora/
+COPY ./nginx_config/nginx /etc/nginx
+RUN envsubst '$DOMAIN' < /etc/nginx/nginx.conf.template > /etc/nginx.conf
 
 ENV WEB_DOCUMENT_ROOT /var/www/mellivora/
 ENV WEB_DOCUMENT_INDEX index.php

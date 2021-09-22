@@ -35,7 +35,6 @@ services:
     ports:
       - "443:443"
     volumes:
-       - ./nginx_config/nginx/:/etc/nginx/
        - ./certbot_certs:/etc/nginx/ssl/
     #  - .:/var/www/mellivora
     #  - composerdependencies:/var/www/mellivora/include/thirdparty/composer
