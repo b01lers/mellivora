@@ -3,6 +3,7 @@ FROM webdevops/php-nginx:7.4
 ARG DOMAIN
 
 RUN echo "DOMAIN: $DOMAIN"
+RUN apt-install gettext-base
 
 COPY . /var/www/mellivora/
 COPY ./nginx_config/nginx /etc/nginx
