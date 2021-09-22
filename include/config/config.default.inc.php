@@ -61,7 +61,7 @@ Config::set('MELLIVORA_CONFIG_ACCOUNTS_DEFAULT_ENABLED', true);
 Config::set('MELLIVORA_CONFIG_ACCOUNTS_EMAIL_PASSWORD_ON_SIGNUP', false);
 
 // is site SSL compatible? if true, ssl will be forced on certain pages
-Config::set('MELLIVORA_CONFIG_SSL_COMPAT', false);
+Config::set('MELLIVORA_CONFIG_SSL_COMPAT', true);
 
 // session & cookie expiry time in seconds
 // 0 until browser is closed
