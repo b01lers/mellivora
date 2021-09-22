@@ -1,26 +1,20 @@
-FROM php:7-apache
+# https://dockerfile.readthedocs.io/en/latest/content/DockerImages/dockerfiles/php-nginx.html
+FROM webdevops/php-nginx:7.4
 
-MAINTAINER Nakiami <contact@greyboxconcepts.com.au>
+COPY ./htdocs /app/htdocs
+COPY ./include /app/include
+COPY ./writable /app/writable
 
-RUN apt-get update && apt-get install -y \
-    git \
-    libssl-dev \
-    libcurl4-openssl-dev \
-    pkg-config \
-    zip \
-    unzip \
-    libonig-dev
+COPY ./composer.json /app/composer.json
+COPY ./composer.lock /app/composer.lock
 
-RUN docker-php-ext-install mbstring curl pdo pdo_mysql
+COPY ./letsencrypt-docker-compose/nginx_ssl/dummy/${DOMAIN}/fullchain.pem /opt/docker/etc/nginx/ssl/server.crt
+COPY ./letsencrypt-docker-compose/nginx_ssl/dummy/${DOMAIN}/privkey.pem /opt/docker/etc/nginx/ssl/server.key
 
-COPY . /var/www/mellivora
-COPY install/lamp/mellivora.apache.conf /etc/apache2/sites-available/000-default.conf
-
+ENV WEB_DOCUMENT_ROOT /app/htdocs
+ENV WEB_DOCUMENT_INDEX index.php
+ENV WEB_ALIAS_DOMAIN ${DOMAIN}
 ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
-WORKDIR /var/www/mellivora/
-RUN composer install --no-dev --optimize-autoloader
 
-RUN chown -R www-data:www-data /var/www/mellivora
-RUN a2enmod rewrite
+WORKDIR /app 
+RUN composer install --no-dev --optimize-autoloader
