@@ -1,0 +1,35 @@
+server_names_hash_bucket_size 64;
+
+server {
+    listen 80;
+
+    server_name $DOMAIN;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot/$DOMAIN;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+# proxy_cache_path /cache keys_zone=mellivora:100m levels=1:2 inactive=100d max_size=100g;
+
+# server {
+#     listen       443 ssl;
+#     server_name  $DOMAIN;
+# 
+#     ssl_certificate /etc/nginx/ssl/dummy/$DOMAIN/fullchain.pem;
+#     ssl_certificate_key /etc/nginx/ssl/dummy/$DOMAIN/privkey.pem;
+# 
+#     include /etc/nginx/options-ssl-nginx.conf;
+# 
+#     ssl_dhparam /etc/nginx/ssl/ssl-dhparams.pem;
+# 
+# 
+#     location / {
+# 	
+#     }
+# 
+# }

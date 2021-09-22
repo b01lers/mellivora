@@ -107,7 +107,7 @@ Config::set('MELLIVORA_CONFIG_RECAPTCHA_PRIVATE_KEY', '');
 // some sort of reverse proxy, like Cloudflare. when set
 // to true, the latest added forwarded-for ip will be used
 // for logging and housekeeping
-Config::set('MELLIVORA_CONFIG_TRUST_HTTP_X_FORWARDED_FOR_IP', false);
+Config::set('MELLIVORA_CONFIG_TRUST_HTTP_X_FORWARDED_FOR_IP', true);
 
 // when this is set to true, an IP address
 // will be resolved when it is listed. set
